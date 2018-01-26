@@ -25,7 +25,7 @@ public class Segment3d : MonoBehaviour
 
     public Vector3 maxRotation;
     public Vector3 minRotation;
-    public Vector3 initialRotation;
+    public Quaternion initialRotation;
     public float angleDifferenceX ;
     public float angleDifferenceY ;
     public float angleDifferenceZ;
@@ -42,25 +42,24 @@ public class Segment3d : MonoBehaviour
         //aquire the length of this segment - the dummy geometry will always be child zero
         length = transform.GetChild(0).localScale.z;
         parentSystem = transform.GetComponentInParent<IKSystem3d>();
-        initialRotation = transform.rotation.eulerAngles;
+        initialRotation = transform.localRotation;
 
     }
 
     public void updateSegmentAndChildren()
     {
-        length = transform.GetChild(0).localScale.z;
-
-        updateSegment();
+        length = transform.GetChild(0).localScale.z;        
 
         //update its children
         if (child)
             child.updateSegmentAndChildren();
+
+        updateSegment();
     }
 
     public void updateSegment()
     {
-
-       
+               
         if (parent)
         {
             Apos = parent.Bpos;         //could also use parent endpoint...
@@ -87,13 +86,56 @@ public class Segment3d : MonoBehaviour
         maxQ = Quaternion.Euler(maxRotation);
         minQ = Quaternion.Euler(minRotation);
 
-        Quaternion a = transform.rotation;                 //save current local rotation
+        Quaternion a = transform.localRotation;                 //save current local rotation       
 
-        Vector3 irot = transform.rotation.eulerAngles;     //get its eulers
+        //quat look does the same as lookat in the end, but I don't need to set the rotation back
+        Vector3 relativePos = target - transform.position;
+        Quaternion b = Quaternion.LookRotation(relativePos);
+
+        //to get a sense of space, use direction vectors compared to cardinals
+        transform.localRotation = initialRotation;  //set transform to initial
+        Vector3 afwd = transform.forward;           //get vector
+                                                    //afwd.Set(afwd.x, 0, afwd.z);              //ignore (project to plane)
+                                                    //afwd.Normalize();                         //normalize
+
+        angleDifferenceX = initialRotation.eulerAngles.x ;
+        angleDifferenceY = initialRotation.eulerAngles.y ;
+        angleDifferenceZ = initialRotation.eulerAngles.z ;        
+
+        angleDifferenceX -= a.eulerAngles.x % 180.0f;         
+
+        angleDifferenceY -= a.eulerAngles.y % 180.0f;
         
-        transform.LookAt(target);                        //look at target
-        Quaternion b = transform.rotation;          //get new local rotation
+        angleDifferenceZ -= a.eulerAngles.z % 180.0f;
+
+        transform.localRotation = a;                //set transform to new rotation
+        Vector3 bfwd = transform.forward;           //do the same
+                                                    //bfwd.Set(bfwd.x, 0, bfwd.z);
+                                                    //bfwd.Normalize();
+
+        transform.localRotation = initialRotation;  //etc...
+        Vector3 argt = transform.right;
+        //argt.Set(argt.x, 0, 0);
+        //argt.Normalize();
         
+        transform.localRotation = a;
+        Vector3 brgt = transform.right;
+        //brgt.Set(brgt.x, 0, 0);
+        //brgt.Normalize();
+        
+        transform.localRotation = initialRotation;
+        Vector3 aup = transform.up;
+        //aup.Set(0, aup.y, 0);
+        //aup.Normalize();
+
+        transform.localRotation = a;
+        Vector3 bup = transform.up;
+        //bup.Set(0, bup.y, 0);
+        //bup.Normalize();
+
+        //angleDifferenceX = Vector3.SignedAngle(afwd, bfwd, transform.right);
+        //angleDifferenceY = Vector3.SignedAngle(aup, bup, transform.forward);
+        //angleDifferenceZ = Vector3.SignedAngle(argt, brgt, transform.up);
 
 
         if (useInterpolation)
@@ -105,83 +147,12 @@ public class Segment3d : MonoBehaviour
                 ir *= 10;
 
 
-            //convert euler and map to -180,180
-            Vector3 euler = b.eulerAngles;
-            
-            xt = euler.x;
-            yt = euler.y;
-            zt = euler.z;
-            
-
-            
-            
-            
-            if (xt > 180)
-                xt -= 180;
-
-            if (yt > 180)
-                yt -= 180;
-
-            if (zt > 180)
-                zt -= 180;
-            
-             
-             
-
-            //use the initial rotation from which the bone limits are calculated.
-            
-            angleDifferenceX = xt - initialRotation.x;
-            angleDifferenceY = yt - initialRotation.y;
-            angleDifferenceZ = zt - initialRotation.z;
-
-
-            QMaxAngle = Mathf.Abs(Quaternion.Angle(maxQ, b));
-            /*
-            if (QMaxAngle < 1)
-                b = maxQ;
-
-            QMinAngle = Mathf.Abs(Quaternion.Angle(minQ, b));
-            if (QMinAngle < 1)
-                b = minQ;
-
-            */
-
-            
-
-            if (angleDifferenceX < minRotation.x || angleDifferenceX > maxRotation.x)
-                xt = irot.x;
-            if (angleDifferenceY < minRotation.y || angleDifferenceY > maxRotation.y)
-                yt = irot.y;
-            if (angleDifferenceZ < minRotation.z || angleDifferenceZ > maxRotation.z)
-                zt = irot.z;
-            
-            
-
-            /*
-            //if ANY constraint value is true, stop and exit - no wrong
-            if (angleDifferenceX < minRotation.x || 
-                angleDifferenceY < minRotation.y || 
-                angleDifferenceZ < minRotation.z || 
-                angleDifferenceX > maxRotation.x || 
-                angleDifferenceY > maxRotation.y || 
-                angleDifferenceZ > maxRotation.z  )
-            {
-                transform.localRotation = a;                     //set it back to initial        
-                Debug.Log("EXIT CONSTRAINT");
-                return;
-            }
-            */
-
-            transform.rotation = a;                     //set it back to initial
-            euler.Set(xt, yt, zt);
-            b.eulerAngles = euler;
-
-
             //spherical interpolate
             float t = Time.deltaTime;
             Quaternion c = Quaternion.Slerp(a, b, t * ir);
 
-            transform.rotation = c;
+
+
 
         }
         else
