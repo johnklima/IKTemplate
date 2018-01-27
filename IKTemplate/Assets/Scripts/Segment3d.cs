@@ -20,6 +20,8 @@ public class Segment3d : MonoBehaviour
 
     public bool useInterpolation = true;
     public bool useConstraints = true;
+    public int  modLostAngles = 1;
+
     public float extraX = 0;
     public float extraY = 0;
     public float extraZ = 0;
@@ -108,7 +110,22 @@ public class Segment3d : MonoBehaviour
         if (useConstraints)
         {
             //we are looking for an axis and an angle
-            float ang;
+            float ang;              //the unstrained angle
+            float ang2;             //the constrained angle
+            float cx = 0;           //the lost angle from child constraint (if any)
+            float cy = 0;
+            float cz = 0;
+
+            //our child may have clamped so if we have one, get its missing rotations
+            if (child )
+            {
+                cx = child.angleDifferenceX * modLostAngles;
+                cy = child.angleDifferenceY * modLostAngles;
+                cz = child.angleDifferenceZ * modLostAngles;
+
+            }
+
+
             Vector3 axis;
             //we will accumulate 3 rotations, one per axis
             Quaternion qx, qy, qz;
@@ -122,9 +139,12 @@ public class Segment3d : MonoBehaviour
 
             //clamp our current angle to range min and max from our neutral pose e.g. thigh can rotate
             //+-60 deg on x from the initial rotation
-            ang = Mathf.Clamp(ang, ix + minRotation.x, ix + maxRotation.x);
-            //and convert to a quat rotation
-            qx = Quaternion.AngleAxis(ang, axis);
+            ang2 = Mathf.Clamp(ang + cx, ix + minRotation.x, ix + maxRotation.x);
+            //how much have we clamped?
+            angleDifferenceX = ang2 - ang;
+
+            //and convert to a quat rotation for this axis
+            qx = Quaternion.AngleAxis(ang2, axis);
 
             //clamp on Y axis - etc...
             b.ToAngleAxis(out ang, out axis);
@@ -132,9 +152,10 @@ public class Segment3d : MonoBehaviour
             axis.x = 0;
             axis.z = 0;
             axis.Normalize();
-            ang = Mathf.Clamp(ang, iy + minRotation.y, iy + maxRotation.y);
+            ang2 = Mathf.Clamp(ang + cy, iy + minRotation.y, iy + maxRotation.y);
+            angleDifferenceY = ang2 - ang;
 
-            qy = Quaternion.AngleAxis(ang, axis);
+            qy = Quaternion.AngleAxis(ang2, axis);
 
             //clamp on z axis
             b.ToAngleAxis(out ang, out axis);
@@ -142,12 +163,17 @@ public class Segment3d : MonoBehaviour
             axis.x = 0;
             axis.y = 0;
             axis.Normalize();
-            ang = Mathf.Clamp(ang, iz + minRotation.z, iz + maxRotation.z);
+            ang2 = Mathf.Clamp(ang + cz, iz + minRotation.z, iz + maxRotation.z);
+            angleDifferenceZ = ang2 - ang;
 
-            qz = Quaternion.AngleAxis(ang, axis);
+            qz = Quaternion.AngleAxis(ang2, axis);
 
             //order here is critical, quats are not mathematically commutive
+            //this is our final angle for this joint
             b = qx * qz * qy;
+
+
+
         }
 
 

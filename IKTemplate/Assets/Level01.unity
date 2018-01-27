@@ -148,6 +148,7 @@ MonoBehaviour:
   interpRate: 2
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -513,6 +514,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -877,6 +879,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -1234,7 +1237,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 342946925}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.43, y: -0.97, z: -0.01}
+  m_LocalPosition: {x: 0.43, y: -0.97, z: 1.34}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children: []
   m_Father: {fileID: 1536143741}
@@ -1315,6 +1318,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c3de3b7d93f084dbdc734cc02bc2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frequency: 2
+  amplitude: 1.5
+  phase: 0
 --- !u!1 &438949932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,10 +1346,9 @@ Transform:
   m_LocalPosition: {x: 6.36, y: -0.25, z: -17.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 852790027}
   - {fileID: 690825866}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &468480229
 GameObject:
@@ -1935,6 +1940,7 @@ MonoBehaviour:
   interpRate: 4
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -2140,7 +2146,7 @@ Transform:
   m_Children:
   - {fileID: 1536143741}
   m_Father: {fileID: 438949933}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &690825867
 MeshRenderer:
@@ -2674,14 +2680,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 852790026}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 3.223, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 6.36, y: 2.97, z: -35.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1107915135}
   - {fileID: 2049771005}
-  m_Father: {fileID: 438949933}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &862571160
 GameObject:
@@ -2962,6 +2968,7 @@ MonoBehaviour:
   interpRate: 1
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -3054,6 +3061,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -3535,6 +3543,7 @@ MonoBehaviour:
   interpRate: 6
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -3671,6 +3680,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -4477,6 +4487,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5017,6 +5028,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5217,6 +5229,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5267,6 +5280,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5332,6 +5346,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -6311,6 +6326,7 @@ MonoBehaviour:
   interpRate: 2
   useInterpolation: 1
   useConstraints: 1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
