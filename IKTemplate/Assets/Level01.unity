@@ -1939,7 +1939,7 @@ MonoBehaviour:
   child: {fileID: 1737196255}
   interpRate: 4
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
@@ -3061,7 +3061,7 @@ MonoBehaviour:
   interpRate: 3
   useInterpolation: 1
   useConstraints: 1
-  modLostAngles: -1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -3302,7 +3302,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1107915134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 3.4}
+  m_LocalPosition: {x: 0, y: -1.14, z: 4.7}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 852790027}
@@ -3543,7 +3543,7 @@ MonoBehaviour:
   interpRate: 6
   useInterpolation: 1
   useConstraints: 1
-  modLostAngles: -1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -6326,7 +6326,7 @@ MonoBehaviour:
   interpRate: 2
   useInterpolation: 1
   useConstraints: 1
-  modLostAngles: -1
+  modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
