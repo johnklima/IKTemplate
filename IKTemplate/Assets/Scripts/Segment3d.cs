@@ -48,13 +48,16 @@ public class Segment3d : MonoBehaviour
 
     public void updateSegmentAndChildren()
     {
-        length = transform.GetChild(0).localScale.z;        
+        length = transform.GetChild(0).localScale.z;
+
+
+        updateSegment();
 
         //update its children
         if (child)
             child.updateSegmentAndChildren();
 
-        updateSegment();
+        
     }
 
     public void updateSegment()
@@ -88,54 +91,51 @@ public class Segment3d : MonoBehaviour
 
         Quaternion a = transform.localRotation;                 //save current local rotation       
 
-        //quat look does the same as lookat in the end, but I don't need to set the rotation back
-        Vector3 relativePos = target - transform.position;
-        Quaternion b = Quaternion.LookRotation(relativePos);
+        transform.LookAt(target);
 
-        //to get a sense of space, use direction vectors compared to cardinals
-        transform.localRotation = initialRotation;  //set transform to initial
-        Vector3 afwd = transform.forward;           //get vector
-                                                    //afwd.Set(afwd.x, 0, afwd.z);              //ignore (project to plane)
-                                                    //afwd.Normalize();                         //normalize
-
-        angleDifferenceX = initialRotation.eulerAngles.x ;
-        angleDifferenceY = initialRotation.eulerAngles.y ;
-        angleDifferenceZ = initialRotation.eulerAngles.z ;        
-
-        angleDifferenceX -= a.eulerAngles.x % 180.0f;         
-
-        angleDifferenceY -= a.eulerAngles.y % 180.0f;
-        
-        angleDifferenceZ -= a.eulerAngles.z % 180.0f;
-
-        transform.localRotation = a;                //set transform to new rotation
-        Vector3 bfwd = transform.forward;           //do the same
-                                                    //bfwd.Set(bfwd.x, 0, bfwd.z);
-                                                    //bfwd.Normalize();
-
-        transform.localRotation = initialRotation;  //etc...
-        Vector3 argt = transform.right;
-        //argt.Set(argt.x, 0, 0);
-        //argt.Normalize();
-        
-        transform.localRotation = a;
-        Vector3 brgt = transform.right;
-        //brgt.Set(brgt.x, 0, 0);
-        //brgt.Normalize();
-        
-        transform.localRotation = initialRotation;
-        Vector3 aup = transform.up;
-        //aup.Set(0, aup.y, 0);
-        //aup.Normalize();
+        Quaternion b = transform.localRotation;
 
         transform.localRotation = a;
-        Vector3 bup = transform.up;
-        //bup.Set(0, bup.y, 0);
-        //bup.Normalize();
 
-        //angleDifferenceX = Vector3.SignedAngle(afwd, bfwd, transform.right);
-        //angleDifferenceY = Vector3.SignedAngle(aup, bup, transform.forward);
-        //angleDifferenceZ = Vector3.SignedAngle(argt, brgt, transform.up);
+
+        float ang;
+        Vector3 axis;
+
+        Quaternion qx, qy, qz;
+
+        //clamp on X axis
+        b.ToAngleAxis(out ang, out axis);
+        float ix = initialRotation.eulerAngles.x;
+        axis.y = 0;
+        axis.z = 0;
+        axis.Normalize();
+        ang = Mathf.Clamp(ang, ix + minRotation.x, ix + maxRotation.x);
+
+        qx = Quaternion.AngleAxis(ang, axis);
+
+        //clamp on Y axis
+        b.ToAngleAxis(out ang, out axis);
+        float iy = initialRotation.eulerAngles.y;
+        axis.x = 0;
+        axis.z = 0;
+        axis.Normalize();
+        ang = Mathf.Clamp(ang, iy + minRotation.y, iy + maxRotation.y);
+
+        qy = Quaternion.AngleAxis(ang, axis);
+
+        //clamp on z axis
+        b.ToAngleAxis(out ang, out axis);
+        float iz = initialRotation.eulerAngles.z;
+        axis.x = 0;
+        axis.y = 0;
+        axis.Normalize();
+        ang = Mathf.Clamp(ang, iz + minRotation.z, iz + maxRotation.z);
+
+        qz = Quaternion.AngleAxis(ang, axis);
+
+        b = qy * qz * qx;
+
+
 
 
         if (useInterpolation)
@@ -146,12 +146,12 @@ public class Segment3d : MonoBehaviour
             if (parentSystem.isDragging)
                 ir *= 10;
 
-
+           
             //spherical interpolate
             float t = Time.deltaTime;
             Quaternion c = Quaternion.Slerp(a, b, t * ir);
-
-
+            
+            transform.localRotation = c;
 
 
         }
