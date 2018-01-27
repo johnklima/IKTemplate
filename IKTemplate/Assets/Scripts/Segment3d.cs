@@ -45,7 +45,7 @@ public class Segment3d : MonoBehaviour
         //aquire the length of this segment - the dummy geometry will always be child zero
         length = transform.GetChild(0).localScale.z;
         parentSystem = transform.GetComponentInParent<IKSystem3d>();
-        initialRotation = transform.localRotation;
+        initialRotation = transform.rotation;
 
     }
 
@@ -87,16 +87,20 @@ public class Segment3d : MonoBehaviour
     public void pointAt(Vector3 target)
     {
 
-        maxQ = Quaternion.Euler(maxRotation);
-        minQ = Quaternion.Euler(minRotation);
+        //remove additional rotations prior to constraint calculations        
+        transform.Rotate(Vector3.left, -extraX, Space.Self);
+        transform.Rotate(Vector3.up, -extraY, Space.Self);
+        transform.Rotate(Vector3.forward, -extraZ, Space.Self);
 
-        Quaternion a = transform.localRotation;                 //save current local rotation       
 
-        transform.LookAt(target);                               //look at the target point
 
-        Quaternion b = transform.localRotation;                 //get that new rotation
+        Quaternion a = transform.rotation;                 //save current local rotation       
 
-        transform.localRotation = a;                            //set the rotation back
+        transform.LookAt(target);                          //look at the target point
+
+        Quaternion b = transform.rotation;                 //get that new rotation
+
+        transform.rotation = a;                            //set the rotation back
 
 
 
@@ -191,7 +195,7 @@ public class Segment3d : MonoBehaviour
             float t = Time.deltaTime;
             Quaternion c = Quaternion.Slerp(a, b, t * ir);
             
-            transform.localRotation = c;
+            transform.rotation = c;
 
 
         }
@@ -200,10 +204,10 @@ public class Segment3d : MonoBehaviour
             transform.rotation = b;
         }
 
-        //additional rotations on axis useful for tweaking and can indeed be animated        
-        transform.Rotate(Vector3.left, extraX * Time.deltaTime, Space.Self);
-        transform.Rotate(Vector3.forward, extraY * Time.deltaTime, Space.Self);
-        transform.Rotate(Vector3.up, extraZ * Time.deltaTime, Space.Self);
+        //apply additional rotations on axis useful for tweaking and can indeed be animated        
+        transform.Rotate(Vector3.left, extraX , Space.Self);
+        transform.Rotate(Vector3.up, extraY , Space.Self);
+        transform.Rotate(Vector3.forward, extraZ , Space.Self);
         
 
     }
