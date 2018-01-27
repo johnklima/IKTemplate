@@ -147,6 +147,7 @@ MonoBehaviour:
   child: {fileID: 1002563948}
   interpRate: 2
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -511,6 +512,7 @@ MonoBehaviour:
   child: {fileID: 1763383263}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -874,6 +876,7 @@ MonoBehaviour:
   child: {fileID: 5035416}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -1931,6 +1934,7 @@ MonoBehaviour:
   child: {fileID: 1737196255}
   interpRate: 4
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -2957,6 +2961,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 1
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -3048,6 +3053,7 @@ MonoBehaviour:
   child: {fileID: 2095217412}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -3526,13 +3532,14 @@ MonoBehaviour:
   Bpos: {x: 8.166758, y: 0.8623427, z: -16.115093}
   parent: {fileID: 2095217412}
   child: {fileID: 0}
-  interpRate: 1
+  interpRate: 6
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 10, y: 2, z: 2}
-  minRotation: {x: -10, y: -2, z: -2}
+  maxRotation: {x: 45, y: 2, z: 2}
+  minRotation: {x: -45, y: -2, z: -2}
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
@@ -3663,6 +3670,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -4468,6 +4476,7 @@ MonoBehaviour:
   child: {fileID: 1754990648}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5007,6 +5016,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5206,6 +5216,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5255,6 +5266,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -5319,6 +5331,7 @@ MonoBehaviour:
   child: {fileID: 1147189082}
   interpRate: 3
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
@@ -6297,6 +6310,7 @@ MonoBehaviour:
   child: {fileID: 1118968340}
   interpRate: 2
   useInterpolation: 1
+  useConstraints: 1
   extraX: 0
   extraY: 0
   extraZ: 0
