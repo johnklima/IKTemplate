@@ -154,7 +154,7 @@ MonoBehaviour:
   extraZ: 0
   maxRotation: {x: 90, y: 2, z: 2}
   minRotation: {x: -2, y: -2, z: -2}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -512,15 +512,15 @@ MonoBehaviour:
   parent: {fileID: 0}
   child: {fileID: 1763383263}
   interpRate: 3
-  useInterpolation: 1
-  useConstraints: 1
+  useInterpolation: 0
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 360, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 90, y: 90, z: 90}
+  minRotation: {x: -90, y: -90, z: -90}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -537,7 +537,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 206293642}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -545,7 +545,7 @@ Transform:
   - {fileID: 720906116}
   m_Father: {fileID: 1379376745}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &235349262
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +885,7 @@ MonoBehaviour:
   extraZ: 0
   maxRotation: {x: 45, y: 0, z: 0}
   minRotation: {x: -45, y: 0, z: 0}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -1237,7 +1237,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 342946925}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.43, y: -0.97, z: 1.34}
+  m_LocalPosition: {x: 0.48, y: 0.32, z: -0.06}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children: []
   m_Father: {fileID: 1536143741}
@@ -1330,7 +1330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 438949933}
   m_Layer: 0
-  m_Name: Body
+  m_Name: LowerBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1343,7 +1343,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 438949932}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.36, y: -0.25, z: -17.3}
+  m_LocalPosition: {x: 0, y: -0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 690825866}
@@ -1725,7 +1725,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 515200503}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1939,14 +1939,14 @@ MonoBehaviour:
   child: {fileID: 1737196255}
   interpRate: 4
   useInterpolation: 1
-  useConstraints: 0
+  useConstraints: 1
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 36, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 70, y: 40, z: 47}
+  minRotation: {x: -30, y: -40, z: -47}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -2403,7 +2403,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 762356706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.08, y: -0.78, z: 1.95}
+  m_LocalPosition: {x: -0.74, y: 0.31, z: 1.95}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children: []
   m_Father: {fileID: 1536143741}
@@ -2680,7 +2680,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 852790026}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.36, y: 2.97, z: -35.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2688,7 +2688,7 @@ Transform:
   - {fileID: 2049771005}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &862571160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,7 +2974,7 @@ MonoBehaviour:
   extraZ: 0
   maxRotation: {x: 10, y: 2, z: 2}
   minRotation: {x: -10, y: 2, z: 2}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -3067,7 +3067,7 @@ MonoBehaviour:
   extraZ: 0
   maxRotation: {x: 45, y: 10, z: 30}
   minRotation: {x: -45, y: -10, z: -30}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -3117,13 +3117,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1093259221}
-  m_LocalRotation: {x: 0.7149138, y: -0, z: -0, w: 0.6992127}
-  m_LocalPosition: {x: 0, y: -0.006435393, z: 0.5599946}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 0.75, y: 1, z: 0.74999994}
   m_Children: []
   m_Father: {fileID: 1737196254}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &1093259223
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3540,7 +3540,7 @@ MonoBehaviour:
   Bpos: {x: 8.166758, y: 0.8623427, z: -16.115093}
   parent: {fileID: 2095217412}
   child: {fileID: 0}
-  interpRate: 6
+  interpRate: 1
   useInterpolation: 1
   useConstraints: 1
   modLostAngles: 1
@@ -3549,7 +3549,7 @@ MonoBehaviour:
   extraZ: 0
   maxRotation: {x: 45, y: 2, z: 10}
   minRotation: {x: -45, y: -2, z: -10}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -3678,15 +3678,15 @@ MonoBehaviour:
   parent: {fileID: 1763383263}
   child: {fileID: 0}
   interpRate: 3
-  useInterpolation: 1
-  useConstraints: 1
+  useInterpolation: 0
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 360, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 90, y: 90, z: 90}
+  minRotation: {x: -90, y: -90, z: -90}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -4043,6 +4043,7 @@ MonoBehaviour:
   isReaching: 1
   isDragging: 0
   childcount: 3
+  useAltIK: 0
 --- !u!1 &1379376744
 GameObject:
   m_ObjectHideFlags: 0
@@ -4065,7 +4066,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1379376744}
-  m_LocalRotation: {x: 0.32988045, y: 0.62923527, z: -0.2544916, w: 0.6561066}
+  m_LocalRotation: {x: 0.000000029802308, y: 0.61760306, z: -0, w: 0.78648996}
   m_LocalPosition: {x: 0.43, y: 4.88, z: -0.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4074,7 +4075,7 @@ Transform:
   - {fileID: 1147189081}
   m_Father: {fileID: 129747135}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 48.863003, y: 90.829, z: 7.09}
+  m_LocalEulerAnglesHint: {x: 0, y: 76.283005, z: 0}
 --- !u!114 &1379376746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4094,6 +4095,7 @@ MonoBehaviour:
   isReaching: 1
   isDragging: 0
   childcount: 3
+  useAltIK: 0
 --- !u!1 &1389773054
 GameObject:
   m_ObjectHideFlags: 0
@@ -4485,15 +4487,15 @@ MonoBehaviour:
   parent: {fileID: 0}
   child: {fileID: 1754990648}
   interpRate: 3
-  useInterpolation: 1
-  useConstraints: 1
+  useInterpolation: 0
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 360, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 90, y: 90, z: 90}
+  minRotation: {x: -90, y: -90, z: -90}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -4510,7 +4512,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1515028403}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4518,7 +4520,7 @@ Transform:
   - {fileID: 1171779224}
   m_Father: {fileID: 1716901577}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &1536143740
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,15 +5028,15 @@ MonoBehaviour:
   parent: {fileID: 1754990648}
   child: {fileID: 0}
   interpRate: 3
-  useInterpolation: 1
-  useConstraints: 1
+  useInterpolation: 0
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 360, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 90, y: 90, z: 90}
+  minRotation: {x: -90, y: -90, z: -90}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -5151,7 +5153,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1716901576}
-  m_LocalRotation: {x: 0.28871846, y: -0.6266089, z: 0.2651717, w: 0.6735629}
+  m_LocalRotation: {x: -0.000000029802322, y: -0.65666354, z: -0, w: 0.7541837}
   m_LocalPosition: {x: -0.43, y: 4.88, z: -0.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5160,7 +5162,7 @@ Transform:
   - {fileID: 1678804192}
   m_Father: {fileID: 129747135}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 46.158, y: -86.026, z: -0.381}
+  m_LocalEulerAnglesHint: {x: 0, y: -82.092, z: 0}
 --- !u!114 &1716901578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5180,6 +5182,7 @@ MonoBehaviour:
   isReaching: 1
   isDragging: 0
   childcount: 3
+  useAltIK: 0
 --- !u!1 &1737196253
 GameObject:
   m_ObjectHideFlags: 0
@@ -5203,7 +5206,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1737196253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.153, z: 1.904}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1093259222}
@@ -5228,14 +5231,14 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 3
   useInterpolation: 1
-  useConstraints: 1
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 36, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 0, y: 0, z: 0}
+  minRotation: {x: 0, y: 0, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -5278,15 +5281,15 @@ MonoBehaviour:
   parent: {fileID: 1515028404}
   child: {fileID: 0}
   interpRate: 3
-  useInterpolation: 1
-  useConstraints: 1
+  useInterpolation: 0
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 360, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 90, y: 90, z: 90}
+  minRotation: {x: -90, y: -90, z: -90}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -5344,15 +5347,15 @@ MonoBehaviour:
   parent: {fileID: 206293643}
   child: {fileID: 1147189082}
   interpRate: 3
-  useInterpolation: 1
-  useConstraints: 1
+  useInterpolation: 0
+  useConstraints: 0
   modLostAngles: 1
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 360, y: 360, z: 360}
-  minRotation: {x: -360, y: -360, z: -360}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  maxRotation: {x: 90, y: 90, z: 90}
+  minRotation: {x: -90, y: -90, z: -90}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0
@@ -5429,6 +5432,7 @@ MonoBehaviour:
   isReaching: 1
   isDragging: 0
   childcount: 3
+  useAltIK: 1
 --- !u!1 &1793678011
 GameObject:
   m_ObjectHideFlags: 0
@@ -5948,6 +5952,7 @@ MonoBehaviour:
   isReaching: 1
   isDragging: 0
   childcount: 2
+  useAltIK: 0
 --- !u!1 &2058211376
 GameObject:
   m_ObjectHideFlags: 0
@@ -6332,7 +6337,7 @@ MonoBehaviour:
   extraZ: 0
   maxRotation: {x: 90, y: 2, z: 2}
   minRotation: {x: -2, y: -2, z: -2}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
   angleDifferenceZ: 0

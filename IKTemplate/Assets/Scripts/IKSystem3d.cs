@@ -16,6 +16,8 @@ public class IKSystem3d : MonoBehaviour
     private bool wasDragging = false;
     public int childcount = 0;
 
+    public bool useAltIK = false;
+
     // Use this for initialization
     void Awake()
     {
@@ -40,7 +42,15 @@ public class IKSystem3d : MonoBehaviour
     void Update()
     {
 
-      
+        if (useAltIK)
+        {
+            // call reach on the first
+            firstSegment.reachAlt(target.position);
+
+
+            return;
+
+        }
         if (isDragging)
         {
             
