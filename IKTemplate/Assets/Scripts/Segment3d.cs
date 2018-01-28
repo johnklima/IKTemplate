@@ -208,8 +208,7 @@ public class Segment3d : MonoBehaviour
 
             float max = initialRotation.x + maxRotation.x;
             float min = initialRotation.x + minRotation.x;
-            if (prot != Quaternion.identity)
-                min -= 90 - prot.eulerAngles.x;
+           
             if (xt > max)
             {
                 qx = Quaternion.Euler(max, 0, 0);
