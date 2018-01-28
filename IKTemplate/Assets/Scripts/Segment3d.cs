@@ -52,12 +52,12 @@ public class Segment3d : MonoBehaviour
     public void updateSegmentAndChildren()
     {
         length = transform.GetChild(0).localScale.z;
-
+        updateSegment();
         //update its children (from toe to hips)
         if (child)
             child.updateSegmentAndChildren();
 
-        updateSegment();
+        
 
     }
 
@@ -91,13 +91,15 @@ public class Segment3d : MonoBehaviour
         transform.Rotate(Vector3.left, -extraX, Space.Self);
         transform.Rotate(Vector3.up, -extraY, Space.Self);
         transform.Rotate(Vector3.forward, -extraZ, Space.Self);
-        
-
-        Quaternion a = transform.rotation;                 //save current local rotation       
-
-        Quaternion b = FindLookAt(target);                 //look at the target point
 
 
+
+        Quaternion a = transform.localRotation;                 //save current local rotation       
+
+        Quaternion b = FindLookAt(target);                      //look at the target point
+
+        //if (parent)
+        //    b = parent.gameObject.transform.localRotation * b;
 
         if (useInterpolation)
         {
@@ -109,13 +111,14 @@ public class Segment3d : MonoBehaviour
 
 
             //set rotation back to start position
-            transform.rotation = a;
+            transform.localRotation = a;
 
             //spherical interpolate
             float t = Time.deltaTime;
             Quaternion c = Quaternion.Slerp(a, b, t * ir);
             
-            transform.rotation = c;
+
+            transform.localRotation = c;
 
 
         }
@@ -177,45 +180,54 @@ public class Segment3d : MonoBehaviour
         if (useConstraints)
         {
             //compose 3 individual angles, x , y, z on each plane
-            
-            //start by total reset of rotations
-            transform.rotation = Quaternion.identity;
+            Quaternion prot = Quaternion.identity;
+            if (parent)
+                prot = parent.gameObject.transform.localRotation;
 
+            //start by total reset of rotations
+            transform.rotation = Quaternion.identity ;
+            
             //X
             
             Vector3 targetDir = target - transform.position;
-            Vector3 currentDir = transform.forward;  //identity
+            Vector3 currentDir = transform.forward;  
 
 
             //flatten to my plane of interest y,z
             currentDir.Set(0, currentDir.y, currentDir.z);
             targetDir.Set(0, targetDir.y, targetDir.z);
             xt = Vector3.SignedAngle(targetDir, currentDir, Vector3.left) ;
+            
             Quaternion qa = Quaternion.AngleAxis(xt, transform.right);
             Quaternion qx =  qa;
-            
+
+
             //clamp X
-            //initial rotation is the "rigging" rotation
-            if (xt > initialRotation.x + maxRotation.x)
+            //initial rotation is the "rigging" rotation, we add parent x to allow
+            //child to rotate "plus" the rig,maxmin, and parent rotation
+            float max = initialRotation.x + maxRotation.x;
+            float min = initialRotation.x + minRotation.x;
+            if (xt > max)
             {
-                qx = Quaternion.Euler(initialRotation.x + maxRotation.x, 0, 0);
-                angleDifferenceX = xt - (initialRotation.x + maxRotation.x);
+                qx = Quaternion.Euler(max, 0, 0);
+                angleDifferenceX = xt - max;
             }               
-            else if (xt < initialRotation.x + minRotation.x)
+            else if (xt < min)
             {
-                qx = Quaternion.Euler(initialRotation.x + minRotation.x, 0, 0);
-                angleDifferenceX = xt - (initialRotation.x + minRotation.x);
+                qx = Quaternion.Euler(min, 0, 0);
+                angleDifferenceX = xt - min;
             }
 
-            xt = Mathf.Clamp(xt, initialRotation.x + minRotation.x, initialRotation.x + maxRotation.x);
+            xt = Mathf.Clamp(xt,min, max);
 
 
             //qx is now a valid rotation on the x axis
 
             //Y
-            //apply the x
-            //transform.rotation = qx;
 
+            max = initialRotation.y + maxRotation.y;
+            min = initialRotation.y + minRotation.y;
+            
             targetDir = target - transform.position;
             currentDir = transform.forward; 
 
@@ -225,25 +237,32 @@ public class Segment3d : MonoBehaviour
             yt = Vector3.SignedAngle(targetDir, currentDir, Vector3.down);
             qa = Quaternion.AngleAxis(yt, transform.up);
             Quaternion qy = qa;
+
             
             //clamp Y
             //initial rotation is the "rigging" rotation
-            if (yt > initialRotation.y + maxRotation.y)
+            if (yt > max)
             {
-                qy = Quaternion.Euler(0, initialRotation.y + maxRotation.y, 0);
-                angleDifferenceY = yt - (initialRotation.y + maxRotation.y);
+                qy = Quaternion.Euler(0, max, 0);
+                angleDifferenceY = yt - max;
             }
-            else if (yt < initialRotation.y + minRotation.y)
+            else if (yt < min)
             {
-                qy = Quaternion.Euler(0, initialRotation.y + minRotation.y, 0);
-                angleDifferenceY = yt - (initialRotation.y + minRotation.y);
+                qy = Quaternion.Euler(0, min, 0);
+                angleDifferenceY = yt - min;
             }
 
-            yt = Mathf.Clamp(yt, initialRotation.y + minRotation.y, initialRotation.y + maxRotation.y);
+            yt = Mathf.Clamp(yt, min, max);
 
-            transform.rotation = Quaternion.Euler(xt, yt, 0);
 
-            //Z is twist, a bit different
+            //Z
+
+            max = initialRotation.z + maxRotation.z;
+            min = initialRotation.z + minRotation.z;
+
+            //first we DO apply the x,y rotation, Z is just a twist
+            transform.localRotation = Quaternion.Euler(xt, yt, 0);
+                        
             targetDir = target - transform.position;
             currentDir = transform.forward;
 
@@ -253,29 +272,31 @@ public class Segment3d : MonoBehaviour
             zt = Vector3.SignedAngle(targetDir, currentDir, Vector3.down);
             qa = Quaternion.AngleAxis(zt, transform.forward);
             Quaternion qz = qa;
-
+            
             //clamp Z
             //initial rotation is the "rigging" rotation
-            if (zt > initialRotation.z + maxRotation.z)
+            if (zt > max)
             {
-                qz = Quaternion.Euler(0, 0, initialRotation.z + maxRotation.z);
-                angleDifferenceZ = zt - (initialRotation.z + maxRotation.z);
+                qz = Quaternion.Euler(0, 0, max);
+                angleDifferenceZ = zt - max;
             }
-            else if (zt < initialRotation.z + minRotation.z)
+            else if (zt < min)
             {
-                qz = Quaternion.Euler(0, 0, initialRotation.z + minRotation.z);
-                angleDifferenceZ = zt - (initialRotation.z + minRotation.z);
+                qz = Quaternion.Euler(0, 0, min);
+                angleDifferenceZ = zt - min;
             }
 
-            zt = Mathf.Clamp(zt, initialRotation.z + minRotation.z, initialRotation.z + maxRotation.z);
+            zt = Mathf.Clamp(zt, min, max);
+
+
 
             return Quaternion.Euler(xt, yt, zt);
             
         }
         else
-            b = Quaternion.LookRotation(Vector3.Normalize(target - transform.position));
+            return Quaternion.LookRotation(Vector3.Normalize(target - transform.position));
 
-        return b;
+        
 
     }
 

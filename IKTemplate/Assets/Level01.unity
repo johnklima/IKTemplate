@@ -3065,8 +3065,8 @@ MonoBehaviour:
   extraX: 0
   extraY: 0
   extraZ: 0
-  maxRotation: {x: 30, y: 10, z: 30}
-  minRotation: {x: -30, y: -10, z: -30}
+  maxRotation: {x: 80, y: 10, z: 30}
+  minRotation: {x: -80, y: -10, z: -30}
   initialRotation: {x: 0, y: 0, z: 0}
   angleDifferenceX: 0
   angleDifferenceY: 0
@@ -3542,7 +3542,7 @@ MonoBehaviour:
   child: {fileID: 0}
   interpRate: 1
   useInterpolation: 1
-  useConstraints: 0
+  useConstraints: 1
   modLostAngles: 1
   extraX: 0
   extraY: 0
@@ -6335,7 +6335,7 @@ MonoBehaviour:
   child: {fileID: 1118968340}
   interpRate: 2
   useInterpolation: 1
-  useConstraints: 0
+  useConstraints: 1
   modLostAngles: 1
   extraX: 0
   extraY: 0
