@@ -17,6 +17,7 @@ public class IKSystem3d : MonoBehaviour
     public int childcount = 0;
 
     public bool useAltIK = false;
+    public bool useCCD = false;
 
     // Use this for initialization
     void Awake()
@@ -42,15 +43,22 @@ public class IKSystem3d : MonoBehaviour
     void Update()
     {
 
+        if (useCCD)
+        {
+            //to be implemented
+            firstSegment.reachCCD(target.position);
+
+        }
+            
+        
         if (useAltIK)
         {
             // call reach on the first
             firstSegment.reachAlt(target.position);
-
-
             return;
 
         }
+
         if (isDragging)
         {
             

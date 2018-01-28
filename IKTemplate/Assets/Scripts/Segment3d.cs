@@ -95,7 +95,7 @@ public class Segment3d : MonoBehaviour
 
         Quaternion a = transform.rotation;                 //save current local rotation       
 
-        Quaternion b = FindLookAt(target);                      //look at the target point
+        Quaternion b = FindLookAt(target);                 //look at the target point
 
 
 
@@ -107,7 +107,10 @@ public class Segment3d : MonoBehaviour
             if (parentSystem.isDragging)
                 ir *= 10;
 
-           
+
+            //set rotation back to start position
+            transform.rotation = a;
+
             //spherical interpolate
             float t = Time.deltaTime;
             Quaternion c = Quaternion.Slerp(a, b, t * ir);
@@ -146,7 +149,11 @@ public class Segment3d : MonoBehaviour
         drag(target);
         updateSegment();
     }
+    public void reachCCD(Vector3 target)
+    {
 
+
+    }
     public void reachAlt(Vector3 target)
     {
         pointAt(target);
@@ -170,66 +177,100 @@ public class Segment3d : MonoBehaviour
         if (useConstraints)
         {
             //compose 3 individual angles, x , y, z on each plane
-            Vector3 tp = target;         
-            tp.Set(tp.x, 0, tp.z);
-
-            Vector3 tt = transform.position;
-            tt.Set(transform.position.x, 0, transform.position.z);
-
-            yt = Vector3.SignedAngle(tt.normalized, tp.normalized, Vector3.up); 
-
-            tp = target;
-            tp.Set(tp.x, tp.y, 0);
-
-            tt = transform.position;
-            tt.Set(transform.position.x, transform.position.y, 0);
-
-            zt = Vector3.SignedAngle(tt.normalized, tp.normalized, Vector3.forward);
             
+            //start by total reset of rotations
+            transform.rotation = Quaternion.identity;
 
+            //X
+            
             Vector3 targetDir = target - transform.position;
-            Vector3 forward = transform.forward;
-            xt = Vector3.SignedAngle(targetDir, forward, Vector3.left) ;
+            Vector3 currentDir = transform.forward;  //identity
+
+
+            //flatten to my plane of interest y,z
+            currentDir.Set(0, currentDir.y, currentDir.z);
+            targetDir.Set(0, targetDir.y, targetDir.z);
+            xt = Vector3.SignedAngle(targetDir, currentDir, Vector3.left) ;
             Quaternion qa = Quaternion.AngleAxis(xt, transform.right);
-            Quaternion qx = transform.rotation * qa;
+            Quaternion qx =  qa;
             
-            //clamp
-            xt = qx.eulerAngles.x;
-            if (xt > 180)
-                xt -= 360;
+            //clamp X
+            //initial rotation is the "rigging" rotation
             if (xt > initialRotation.x + maxRotation.x)
-                qx *= Quaternion.Inverse(qa);
+            {
+                qx = Quaternion.Euler(initialRotation.x + maxRotation.x, 0, 0);
+                angleDifferenceX = xt - (initialRotation.x + maxRotation.x);
+            }               
             else if (xt < initialRotation.x + minRotation.x)
-                qx *= Quaternion.Inverse(qa);
+            {
+                qx = Quaternion.Euler(initialRotation.x + minRotation.x, 0, 0);
+                angleDifferenceX = xt - (initialRotation.x + minRotation.x);
+            }
+
+            xt = Mathf.Clamp(xt, initialRotation.x + minRotation.x, initialRotation.x + maxRotation.x);
+
+
+            //qx is now a valid rotation on the x axis
+
+            //Y
+            //apply the x
+            //transform.rotation = qx;
+
+            targetDir = target - transform.position;
+            currentDir = transform.forward; 
+
+            //flatten to my plane of interest x,z
+            currentDir.Set(currentDir.x, 0, currentDir.z);
+            targetDir.Set(targetDir.x, 0, targetDir.z);
+            yt = Vector3.SignedAngle(targetDir, currentDir, Vector3.down);
+            qa = Quaternion.AngleAxis(yt, transform.up);
+            Quaternion qy = qa;
             
+            //clamp Y
+            //initial rotation is the "rigging" rotation
+            if (yt > initialRotation.y + maxRotation.y)
+            {
+                qy = Quaternion.Euler(0, initialRotation.y + maxRotation.y, 0);
+                angleDifferenceY = yt - (initialRotation.y + maxRotation.y);
+            }
+            else if (yt < initialRotation.y + minRotation.y)
+            {
+                qy = Quaternion.Euler(0, initialRotation.y + minRotation.y, 0);
+                angleDifferenceY = yt - (initialRotation.y + minRotation.y);
+            }
 
-            Quaternion q =  qx;            
+            yt = Mathf.Clamp(yt, initialRotation.y + minRotation.y, initialRotation.y + maxRotation.y);
 
-            return q;
+            transform.rotation = Quaternion.Euler(xt, yt, 0);
 
-            Vector3 euler = b.eulerAngles;
+            //Z is twist, a bit different
+            targetDir = target - transform.position;
+            currentDir = transform.forward;
 
-            if (euler.x > 180)
-                euler.x -= 360;
+            //flatten to my plane of interest x,y
+            currentDir.Set(currentDir.x, 0, currentDir.z);
+            targetDir.Set(targetDir.x, 0, targetDir.z);
+            zt = Vector3.SignedAngle(targetDir, currentDir, Vector3.down);
+            qa = Quaternion.AngleAxis(zt, transform.forward);
+            Quaternion qz = qa;
 
-            if (euler.y > 180)
-                euler.y -= 360;
+            //clamp Z
+            //initial rotation is the "rigging" rotation
+            if (zt > initialRotation.z + maxRotation.z)
+            {
+                qz = Quaternion.Euler(0, 0, initialRotation.z + maxRotation.z);
+                angleDifferenceZ = zt - (initialRotation.z + maxRotation.z);
+            }
+            else if (zt < initialRotation.z + minRotation.z)
+            {
+                qz = Quaternion.Euler(0, 0, initialRotation.z + minRotation.z);
+                angleDifferenceZ = zt - (initialRotation.z + minRotation.z);
+            }
 
-            if (euler.z > 180)
-                euler.z -= 360;
+            zt = Mathf.Clamp(zt, initialRotation.z + minRotation.z, initialRotation.z + maxRotation.z);
 
-
-
-            float x = Mathf.Clamp(euler.x, initialRotation.x + minRotation.x, initialRotation.x + maxRotation.x);
-            float y = Mathf.Clamp(euler.y, initialRotation.y + minRotation.y, initialRotation.y + maxRotation.y);
-            float z = Mathf.Clamp(euler.z, initialRotation.z + minRotation.z, initialRotation.z + maxRotation.z);
-
-            angleDifferenceX = euler.x - x;
-            angleDifferenceY = euler.y - y;
-            angleDifferenceZ = euler.z - z;
-
-            b = Quaternion.Euler(x, y, z);
-
+            return Quaternion.Euler(xt, yt, zt);
+            
         }
         else
             b = Quaternion.LookRotation(Vector3.Normalize(target - transform.position));
@@ -237,6 +278,9 @@ public class Segment3d : MonoBehaviour
         return b;
 
     }
+
+
+
 
     Quaternion Qclamp(Quaternion b)
     {
