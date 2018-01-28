@@ -205,8 +205,11 @@ public class Segment3d : MonoBehaviour
             //clamp X
             //initial rotation is the "rigging" rotation, we add parent x to allow
             //child to rotate "plus" the rig,maxmin, and parent rotation
+
             float max = initialRotation.x + maxRotation.x;
             float min = initialRotation.x + minRotation.x;
+            if (prot != Quaternion.identity)
+                min -= 90 - prot.eulerAngles.x;
             if (xt > max)
             {
                 qx = Quaternion.Euler(max, 0, 0);
