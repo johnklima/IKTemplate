@@ -4040,6 +4040,7 @@ MonoBehaviour:
   - {fileID: 5035416}
   - {fileID: 1002563948}
   target: {fileID: 762356707}
+  parentTransform: {fileID: 438949933}
   isReaching: 1
   isDragging: 0
   childcount: 3
@@ -4093,6 +4094,7 @@ MonoBehaviour:
   - {fileID: 1763383263}
   - {fileID: 1147189082}
   target: {fileID: 329016876}
+  parentTransform: {fileID: 852790027}
   isReaching: 1
   isDragging: 0
   childcount: 3
@@ -5181,6 +5183,7 @@ MonoBehaviour:
   - {fileID: 1754990648}
   - {fileID: 1678804193}
   target: {fileID: 474240235}
+  parentTransform: {fileID: 852790027}
   isReaching: 1
   isDragging: 0
   childcount: 3
@@ -5432,6 +5435,7 @@ MonoBehaviour:
   - {fileID: 2095217412}
   - {fileID: 1118968340}
   target: {fileID: 342946926}
+  parentTransform: {fileID: 438949933}
   isReaching: 1
   isDragging: 0
   childcount: 3
@@ -5953,6 +5957,7 @@ MonoBehaviour:
   - {fileID: 666015176}
   - {fileID: 1737196255}
   target: {fileID: 1107915135}
+  parentTransform: {fileID: 852790027}
   isReaching: 1
   isDragging: 0
   childcount: 2

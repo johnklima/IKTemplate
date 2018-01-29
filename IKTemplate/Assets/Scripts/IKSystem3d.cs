@@ -6,6 +6,7 @@ public class IKSystem3d : MonoBehaviour
 {
     public Segment3d[] segments;
     public Transform target = null;
+    public Transform parentTransform;
 
     public bool isReaching = false;
     public bool isDragging = false;
@@ -42,6 +43,14 @@ public class IKSystem3d : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //move to origin
+
+        Vector3 position = parentTransform.position;
+        Quaternion rotation = parentTransform.rotation;
+
+        parentTransform.position = Vector3.zero;
+        parentTransform.rotation = Quaternion.identity;
 
         if (useCCD)
         {
@@ -93,6 +102,11 @@ public class IKSystem3d : MonoBehaviour
 
 
         }
+
+        //move back
+        parentTransform.position = position;
+        parentTransform.rotation = rotation;
+
     }
 }
 
